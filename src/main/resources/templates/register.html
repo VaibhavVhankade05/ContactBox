@@ -23,7 +23,12 @@
 				<p class="mt-2 text-gray-600 dark:text-gray-300 text-center">Create
 					Your ContactBox Account</p>
 
-				<form data-th-action="@{'/register/process'}" method="post" class="mt-6">
+				<form 
+				data-th-action="@{'/register/process'}" 
+				method="post" 
+				data-th-object="${userForm}"
+				class="mt-6">
+				
 					<!-- Username Field -->
 					<div class="mb-4">
 						<label for="username"
@@ -33,6 +38,7 @@
 						type="text" 
 						id="username" 
 						name="username" 
+						th:field="*{name}"
 						placeholder="Enter name" required
 						class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-600">
 					</div>
@@ -46,6 +52,7 @@
 						type="email" 
 						id="email" 
 						name="email" 
+						th:field="*{email}"
 						placeholder="Enter email" required
 						class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-600">
 					</div>
@@ -60,6 +67,7 @@
 							type="tel" 
 							id="phone" 
 							name="phone"
+							th:field="*{phoneNumber}"
 							placeholder="123-456-7890" required
 							class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-600">
 					</div>
@@ -73,6 +81,7 @@
 						type="password" 
 						id="password" 
 						name="password" 
+						th:field="*{password}"
 						placeholder="Enter password" required
 						class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-600">
 					</div>
@@ -86,6 +95,7 @@
 						<textarea 
 						id="about" 
 						name="about" 
+						th:field="*{about}"
 						rows="4" 
 						placeholder="Message"
 						class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-600"></textarea>
