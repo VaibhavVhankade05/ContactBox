@@ -6,7 +6,7 @@ import java.util.List;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity(name = "user")
+@Entity
 @Getter
 @Setter
 @AllArgsConstructor
@@ -28,8 +28,14 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "profile_picture", length = 255) // Adjusted to a typical length
+    @Column(name = "profile_picture", length = 255) 
     private String profilePic;
+    
+    @Column(name = "phone", length = 255) 
+    private String phoneNumber;
+    
+    @Column(name = "about", length = 255)
+    private String about;
 
     @Column(name = "enabled", nullable = false)
     private boolean enabled = false;
@@ -46,4 +52,6 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Contacts> contacts = new ArrayList<>();
+    
+   
 }

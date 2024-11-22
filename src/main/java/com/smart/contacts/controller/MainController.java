@@ -3,6 +3,9 @@ package com.smart.contacts.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.smart.contacts.forms.UserForm;
 
 @Controller
 public class MainController 
@@ -52,9 +55,18 @@ public class MainController
 	
 	
 	@RequestMapping("/register")
-	public String registerPage()
+	public String registerPage(Model model)
 	{
+		UserForm userForm = new UserForm();
+		model.addAttribute("userForm", userForm);
 		return "register";
+	}
+	
+	@RequestMapping(value="/register/process" , method = RequestMethod.POST)
+	public String processregister()
+	{
+		System.out.println("Vaibhav");
+		return "";
 	}
 
 }

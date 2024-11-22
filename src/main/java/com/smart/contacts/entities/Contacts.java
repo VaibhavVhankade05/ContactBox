@@ -1,16 +1,21 @@
 package com.smart.contacts.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity(name = "contacts")
+@Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Contacts {
 
     @Id
@@ -39,11 +44,10 @@ public class Contacts {
     @Column(name = "favorite", nullable = false)
     private boolean favorite = false;
 
-    @Column(name = "website_link", length = 255)
-    private String websiteLink;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @OneToMany(mappedBy = "contacts", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    private List<SocialLink> socialLink = new ArrayList<>();
 }
