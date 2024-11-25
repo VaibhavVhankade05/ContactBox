@@ -1,8 +1,11 @@
 package com.smart.contacts.controller;
 
+import javax.naming.Binding;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +17,7 @@ import com.smart.contacts.helper.MessageType;
 import com.smart.contacts.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @Controller
 public class MainController {
@@ -23,7 +27,7 @@ public class MainController {
 
     @RequestMapping("/")
     public String index() {
-        return "home";
+        return "redirect:/home";
     }
 
     @RequestMapping("/home")
@@ -58,7 +62,12 @@ public class MainController {
     }
 
     @RequestMapping(value = "/register/process", method = RequestMethod.POST)
-    public String processRegister(@ModelAttribute UserForm userForm, HttpSession session) {
+    public String processRegister(@Valid @ModelAttribute UserForm userForm ,BindingResult bindingResult , HttpSession session) {
+    	
+    	if(bindingResult.hasErrors())
+    	{
+    		return "register";
+    	}
     	
             // Create a User entity from UserForm
             User user = new User();
@@ -68,10 +77,11 @@ public class MainController {
             user.setPhoneNumber(userForm.getPhoneNumber());
             user.setAbout(userForm.getAbout());
             user.setProfilePic("/images/defaultProfilePicture.png");
-
             // Save user using the service
             userService.saveUser(user);
 
+            
+            
             // Success message
             Message message = Message.builder()
     	    		.content("Resigtred Successfully")

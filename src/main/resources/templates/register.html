@@ -20,10 +20,10 @@
 
 			<div
 				class="bg-gray-200 p-8 rounded-lg shadow-lg w-full max-w-md dark:bg-gray-800">
-				
+
 				<!-- Alert Message -->
 				<div data-th-replace="message::messagebox"></div>
-				
+
 				<h1
 					class="text-2xl font-bold text-gray-800 dark:text-white text-center">Sign
 					Up</h1>
@@ -31,7 +31,7 @@
 					Your ContactBox Account</p>
 
 				<form data-th-action="@{'/register/process'}" method="post"
-					data-th-object="${userForm}" class="mt-6">
+					data-th-object="${userForm}" class="mt-6" novalidate>
 
 					<!-- Username Field -->
 					<div class="mb-4">
@@ -41,6 +41,10 @@
 						<input type="text" id="username" name="username"
 							th:field="*{name}" placeholder="Enter name" required
 							class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-600">
+
+						<p data-th-if="${#fields.hasErrors('name')}"
+							data-th-errors="*{name}" class="text-red-600 py-2 px-1">Name
+							is reqiured !</p>
 					</div>
 
 					<!-- Email Field -->
@@ -51,15 +55,25 @@
 						<input type="email" id="email" name="email" th:field="*{email}"
 							placeholder="Enter email" required
 							class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-600">
+
+						<p data-th-if="${#fields.hasErrors('email')}"
+							data-th-errors="*{email}" class="text-red-600 py-2 px-1">Email
+							is reqiured !</p>
 					</div>
 
 					<!-- Phone Number Field -->
 					<div class="mb-4">
 						<label for="phone"
 							class="block text-sm font-medium text-gray-700 dark:text-gray-300">Phone
-							Number</label> <input type="tel" id="phone" name="phone"
+							Number</label> 
+							
+							<input type="tel" id="phone" name="phoneNumber"
 							th:field="*{phoneNumber}" placeholder="123-456-7890" required
 							class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-600">
+							
+						<p th:if="${#fields.hasErrors('phoneNumber')}"
+							th:errors="*{phoneNumber}" class="text-red-600 py-2 px-1">Number
+							is reqiured !</p>
 					</div>
 
 					<!-- Password Field -->
@@ -70,6 +84,9 @@
 						<input type="password" id="password" name="password"
 							th:field="*{password}" placeholder="Enter password" required
 							class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-600">
+
+						<p data-th-if="${#fields.hasErrors('password')}"
+							data-th-errors="*{password}" class="text-red-600 py-2 px-1"></p>
 					</div>
 
 					<!-- Textarea Field -->
@@ -81,6 +98,10 @@
 						<textarea id="about" name="about" th:field="*{about}" rows="4"
 							placeholder="Message"
 							class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-600"></textarea>
+
+						<p data-th-if="${#fields.hasErrors('about')}"
+							data-th-errors="*{about}" class="text-red-600 py-2 px-1">Phone
+							number is reqiured !</p>
 					</div>
 
 					<!-- Submit and Reset Buttons -->

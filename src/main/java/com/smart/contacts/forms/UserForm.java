@@ -1,25 +1,25 @@
 package com.smart.contacts.forms;
 
 import jakarta.persistence.Column;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.*;
 
 
 public class UserForm 
 {
-	@NotBlank(message = "Username Is Requried")
-	@Column(name = "name", nullable = false, length = 100)
+	@NotBlank(message = "Name is requried")
     private String name;
 
-    @Column(name = "email", nullable = false, unique = true, length = 150)
+	@Email(message = "Invalid email address")
+	@NotBlank(message = "Email is requried")
     private String email;
 
-    @Column(name = "password", nullable = false)
+	@NotBlank(message = "Password is reqiured")
     private String password;
     
-    @Column(name = "about", length = 255)
+	@NotBlank(message = "About is reqiured")
     private String about;
     
-    @Column(name = "phone", length = 255) 
+	@NotBlank(message = "Invalid number")
     private String phoneNumber;
 
 	public String getName() {
