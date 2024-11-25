@@ -1,10 +1,12 @@
 package com.smart.contacts.forms;
 
 import jakarta.persistence.Column;
+import jakarta.validation.constraints.NotBlank;
 
 
 public class UserForm 
 {
+	@NotBlank(message = "Username Is Requried")
 	@Column(name = "name", nullable = false, length = 100)
     private String name;
 
